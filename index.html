@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Todo System</title>
+    <link rel="shortcut icon" type="text/css" href="favicon.png">
+    <link rel="stylesheet" type="text/css" href="font_awesome_4.7.0/css/font_awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/media.css">
+    <script src="jquery_ui/jquery.min.js"></script>
+    <script src="jquery_ui/jquery-ui.min.js"></script>
+    <script src="chart_js/chart.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <div class="navigation-container">
+            <div class="left-side">
+                <h2 class="nav-heading-text">Todo System</h2>
+            </div>
+            <div class="right-side">
+                <div class="fa fa-bars" id="menu" title="Open menu"></div>
+                <div class="menu-drop-down">
+                    <li class="menu-list" id="reset-password-list"><span class="fa fa-eye-slash"></span> Create password</li>
+                    <li class="menu-list" id="open-month-modal"><span class="fa fa-calendar-check-o"></span> Monthly activity</li>
+                    <li class="menu-list command-line"><span class="fa fa-file-code-o"></span> Command line</li>
+                    <li class="menu-list reload-app"><span class="fa fa-refresh"></span> Reboot app</li>
+                    <li class="menu-list analysis"><span class="fa fa-line-chart"></span> Statistics</li>
+                    <li class="delete-all menu-list"><span class="fa fa-trash"></span> Delete all</li>
+                    <li class="menu-list" id="save-file"><span class="fa fa-floppy-o"></span> Save</li>
+                    <li class="close menu-list"><span class="fa fa-close"></span> Close</li>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="list-main-container">
+        <div class="list-container">
+            <div class="list-header">Todo System</div>
+            <div class="list-group-item"></div>
+            <div class="form-container">
+                <form onsubmit="appInstance.postData(event)">
+                    <input type="text" class="user_item_input" name="user_input" placeholder="Your item..." autofocus maxlength="20">
+                    <button type="submit" class="add-item">Add item</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-load-modal">
+        <div class="spinner"></div>
+        <h2>Loading....</h2>
+    </div>
+
+    <div class="modal"></div>
+
+    <div class="cmd-modal hide">
+        <div class="cmd-modal-box">
+            <div class="cmd-modal-box-header">
+                <h2>Terminal</h2>
+                <div class="cmd-modal-box-header-control">
+                    <div class="red modal-head-control"></div>
+                </div>
+            </div>
+            <div class="command-activity"></div>
+            <div class="user-command-container">
+                <div class="command-sign">$</div>
+                <div class="command-section">
+                    <form class="command-form">
+                        <input type="text" class="user_command_input" name="user_command_input" autofocus placeholder="Type help" maxlength="25">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="password-modal" id="on_reset">
+        <div class="form-password-modal-box">
+            <form class="login_form" onsubmit="appInstance.setUserPassword(event)">
+                <div class="login-detail">
+                    <h2><span class="fa fa-user"></span> Protect password</h2>
+                </div>
+                <div class="login_password">
+                    <input class="login_user_password" type="password" placeholder="Password..." name="user_password" required autofocus>
+                    <label>
+					<input type="checkbox" />
+					<span class="fa fa-eye increase" 
+					id="user_password_set"
+					onclick="appInstance.loginUser()">
+					</span>
+				</label>
+                </div>
+                <button type="submit" id="login-button">Sign in</button>
+            </form>
+        </div>
+        <span class="fa fa-refresh" id="reload-reset-2" title="Reboot app"></span>
+    </div>
+
+    <div class="form-modal hide">
+        <div class="form-modal-box">
+            <h2><span class="fa fa-user"></span> Set password</h2>
+            <form onsubmit="appInstance.resetPassword(event)">
+                <div class="user_password">
+                    <input type="password" class="user_password_input" id="user_password_one" placeholder="Your old password" name="user_password" autofocus autocomplete required />
+                    <div class="icon" id="set_password">
+                        <label>
+						<input type="checkbox" />
+						<span class="fa fa-eye" id="user_password_set" 
+						onclick="appInstance.userPasswordSwitch()">
+						</span>
+					</label>
+                    </div>
+                </div>
+                <div class="confirm_password">
+                    <input type="password" class="user_password_input" id="user_password_two" placeholder="Your new password" name="confirm_password" autocomplete required />
+                    <div class="icon" id="set_password_confirm">
+                        <label>
+						<input type="checkbox" />
+						<span class="fa fa-eye" id="user_password_confirm"
+						onclick="appInstance.confirmPasswordSwitch()"></span>
+					</label>
+                    </div>
+                </div>
+                <div class="submit">
+                    <button type="submit" id="reset-password">Reset Password</button>
+                </div>
+            </form>
+        </div>
+        <span class="fa fa-refresh" id="reload-reset" title="Reboot app"></span>
+    </div>
+
+    <div class="month-modal">
+        <span class="fa fa-close" id="cls-month-modal"></span>
+        <div class="month-task-container">
+        </div>
+    </div>
+
+    <div class="confirm-user-modal">
+        <div class="confirm-user-modalbox">
+            <h3>Do you need a todo list protect password?</h3>
+            <div class="button-container">
+                <button class="yes-btn" onclick="appInstance.doNeedPassword(true)">YES</button>
+                <button class="no-btn" onclick="appInstance.doNeedPassword(false)">NO</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="month-edit-modal">
+        <div class="month-edit-modal-box">
+
+            <span class="fa fa-close" id="close-btn-month"></span>
+            <h3 class="header-title"></h3>
+            <div class="switch-menu">
+                <li class="edit-view edit edit-view-current" onclick="appInstance.switchpane('edit','month-form-container')">Edit</li>
+                <li class="edit-view view" onclick="appInstance.switchpane('view', 'view-container')">View</li>
+            </div>
+            <div class="edit-content-align">
+                <div class="month-form-container form-edit-view-agent current-pane-edit">
+                    <form onsubmit="appInstance.getNotes(event)">
+                        <input class="text-title" placeholder="Your title..." name="note_title">
+                        <textarea class="note" name="note_content" placeholder="Your note..."></textarea>
+                        <button type="submit" class="save-note"> <span class="fa fa-floppy-o">Save note</button>
+                    </form>
+                </div>
+                <div class="view-container form-edit-view-agent hide-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chart-modal">
+        <span class="fa fa-close" id="close-chart-modal"></span>
+        <h1 class="stats-header">
+            <span>Statistics</span>
+        </h1>
+        <div class="chart-main">
+            <canvas id="statistics"></canvas>
+        </div>
+    </div>
+
+    <script src="jquery/app.jquery.js"></script>
+    <script src="javascript/app.js"></script>
+</body>
+
+</html>

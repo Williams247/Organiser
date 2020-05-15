@@ -1,0 +1,185 @@
+@media only screen and (min-width: 690px) {
+    .form-password-modal-box {
+        background: white;
+        width: 60%;
+        height: 32vh;
+        padding: .3rem;
+        border-radius: 8px;
+        cursor: move;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .text-content {
+        width: 60%;
+        height: 10vh;
+        font-size: 1.5rem;
+        padding: .75rem 0;
+        color: white;
+        cursor: text;
+        font-weight: bold;
+        margin-top: .52rem;
+        cursor: move;
+    }
+    #close {
+        color: white;
+        width: 20%;
+        height: 10vh;
+        font-size: 3rem;
+        padding: .65rem 0;
+        text-align: center;
+        cursor: pointer;
+        transition: 222ms
+    }
+    #check-mark {
+        color: white;
+        width: 20%;
+        height: 10vh;
+        font-size: 3rem;
+        padding: .65rem 0;
+        text-align: center;
+        cursor: pointer;
+        transition: 222ms
+    }
+    .user_item_input {
+        width: 70%;
+        margin: 0 2%;
+        height: 8vh;
+        background: #2c2f3f;
+        border: none;
+        border-radius: .5rem;
+        text-indent: 1rem;
+        color: white;
+        font-weight: bold;
+        font-size: 1.5rem
+    }
+    .form-container {
+        background: #3d4054;
+        height: 12vh;
+    }
+    .add-item {
+        width: 23%;
+        cursor: pointer;
+        margin: 0;
+        height: 8vh;
+        border: none;
+        border-radius: .5rem;
+        background: #2c2f3f;
+        color: white;
+        font-weight: bold
+    }
+    .cmd-modal-box {
+        background: black;
+        width: 45%;
+        height: 70vh;
+        border: 6px solid #272728;
+        box-shadow: 3px 7px 12px black;
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+        border-bottom-left-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+        color: white;
+        overflow: hidden;
+    }
+    .cmd-modal-box-header {
+        width: 44.3%;
+        height: 6vh;
+        background: #272728;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+    }
+    .monthly-task {
+        background: white;
+        width: 25%;
+        height: 35vh;
+        margin: 2% 2%;
+        border-radius: 1rem;
+        border: 3px solid #0ecc68;
+        animation-name: scaler;
+        animation-iteration-count: 1;
+        animation-duration: 1s;
+        animation-timing-function: ease-in-out;
+    }
+    .view-button {
+        background: #0ecc68;
+        height: 7vh;
+        width: 40%;
+        border: none;
+        color: white;
+        font-weight: bold;
+        font-size: 1rem;
+        margin: 17% 30%;
+        border-radius: 3rem;
+        transition: .888ms ease;
+        cursor: pointer;
+    }
+    .month-edit-modal-box {
+        background: white;
+        width: 70%;
+        height: 85vh;
+        animation-name: scaler-two;
+        animation-iteration-count: 1;
+        animation-duration: 555ms;
+        animation-timing-function: ease-in-out;
+    }
+    .month-edit-modal-box {
+        background: white;
+        width: 70%;
+        height: 85vh;
+        animation-name: scaler-two;
+        animation-iteration-count: 1;
+        animation-duration: 555ms;
+        animation-timing-function: ease-in-out;
+    }
+    .edit-view {
+        float: left;
+        padding: 1rem;
+        width: 20%;
+        text-align: center;
+        font-weight: bold;
+    }
+    .form-password-modal-box {
+        background: white;
+        width: 21%;
+        height: 32vh;
+        padding: .3rem;
+        border-radius: 8px;
+        cursor: move;
+    }
+    .form-password-modal-box h2 {
+        font-size: .8rem;
+    }
+    .form-modal-box {
+        background: white;
+        width: 22%;
+        height: 35vh;
+        padding: 1rem;
+        border-radius: 8px;
+        cursor: move;
+    }
+    .form-modal-box h2 {
+        font-size: .8rem;
+    }
+    .confirm-user-modalbox {
+        background: white;
+        width: 30%;
+        height: 20vh;
+    }
+    #close-chart-modal {
+        float: right;
+        margin-right: 2rem;
+        margin-top: 1rem;
+        font-size: 2rem;
+        cursor: pointer;
+    }
+    .chart-main {
+        width: 30%;
+        margin: 5% 35%;
+    }
+    .stats-header {
+        margin: 2rem 2rem;
+    }
+}

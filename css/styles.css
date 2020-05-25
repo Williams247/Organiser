@@ -11,6 +11,18 @@
      user-select: none;
      outline: none;
  }
+
+ 
+.swal-button-container>button {
+    background: #2c2f3f !important;
+    color: white;
+}
+
+.swal-text {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2c2f3f;
+}
  
  body {
      background: #2c2f3f

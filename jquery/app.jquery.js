@@ -110,40 +110,53 @@ $(document).ready(() => {
                     '<li>To reboot this app, type <strong>reboot app</strong></li>',
                     '<li>To close terminal, type <strong>exit</strong></li>'
                 ).slideDown('slow')
-                return false;
+                break;
             case 'monthly activity help':
                 returnScreen.append(
                     '<li>The monthly activity feature of this application is used for creating set goals for every month of the year.</li>',
                     '<li>To delete a particular monthly activity type <strong>delete monthly specific</strong></li>',
                     '<li>To delete all monthly task permanently, type <strong>delete monthly task</strong></li>',
                 );
-                return false;
+                break;
             case 'delete monthly specific':
                 appInstance.deleteMonthlySpecific()
-                return false;
+                break;
             case 'remove password':
                 appInstance.removePassWord()
-                return false;
+                break;
             case 'create new password':
                 appInstance.newUserPassWord()
-                return false;
+                break;
             case 'clear':
                 returnScreen.html('')
-                return false;
+                break;
             case 'delete monthly task':
-                if (confirm('Doing this will delete all your monthly tasks!') === true) {
-                    localStorage.removeItem('cardList');
-                    alert('Your monthly activity is deleted!');
-                    appInstance.reloadApp()
-                } else {
-                    alert('Operation terminated!')
-                }
-                return false;
+
+                swal({
+                    title: "Are you sure?",
+                    text: "Doing this will delete all your monthly tasks!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                  })
+                  .then((willDelete) => {
+                    if (willDelete) {
+                      swal("Your monthly activity is deleted!", {
+                        icon: "success",
+                      });
+                        localStorage.removeItem('cardList');
+                        setTimeout(() => location.reload(), 2000);
+                    } else {
+                        swal('Operation terminated!')
+                    }
+                  });
+
+                break;
             case 'app --version':
                 returnScreen.append(
                     '<li>version 1.0.0</li>'
                 ).slideDown('slow')
-                return false;
+                break;
             case 'color help':
                 returnScreen.append(
                     '<li>For red color, type <strong>red</strong></li>',
@@ -155,66 +168,62 @@ $(document).ready(() => {
                     '<li>For purple color, type <strong>purple</strong></li>',
                     '<li>For gray color, type <strong>gray</strong></li>',
                 ).slideDown('slow')
-                return false;
+                break;
             case 'red':
                 $('.command-activity, .user_command_input')
                     .css({ 'color': 'red' })
-                return false;
+                break;
             case 'blue':
                 $('.command-activity, .user_command_input')
                     .css({ 'color': 'blue' })
-                return false;
+                break;
             case 'green':
                 $('.command-activity, .user_command_input')
                     .css({ 'color': 'green' })
-                return false;
+                break;
             case 'lightblue':
                 $('.command-activity, .user_command_input')
                     .css({ 'color': 'lightblue' })
-                return false;
+                break;
             case 'lightgreen':
                 $('.command-activity, .user_command_input')
                     .css({ 'color': 'lightgreen' })
-                return false;
+                break;
             case 'yellow':
                 $('.command-activity, .user_command_input')
                     .css({ 'color': 'yellow' })
-                return false;
+                break;
             case 'purple':
                 $('.command-activity, .user_command_input')
                     .css({ 'color': 'purple' })
-                return false;
+                break;
             case 'white':
                 $('.command-activity, .user_command_input')
                     .css({ 'color': 'white' })
-                return false;
+                break;
             case 'gray':
                 $('.command-activity, .user_command_input')
                     .css({ 'color': 'gray' })
-                return false;
+                break;
             case 'exit':
                 $('.command-activity').text('Good bye...');
                 setTimeout(() => {
                     $('.cmd-modal').fadeOut('fast').addClass('hide');
                     $('.command-activity').text('');
                 }, 1500);
-                return false;
+                break;
             case 'reset password':
                 $('.form-modal').removeClass('hide');
-                return false;
+                break;
             case 'delete storage list':
                 appInstance.deleteAll();
-                return false;
+                break;
             case 'reboot app':
                 appInstance.reloadApp();
-                return false;
+                break;
             case 'time and date now':
                 returnScreen.append(`<li>${moment.toLocaleString()}</li>`)
-                return false;
-            case 'documentation':
-                window.open('documentation.html');
-                alert('The documentation page has been opened on a new tab, go check it out!');
-                return false;
+                break;
             default:
                 if (!userCommand) {
                     returnScreen.append(`<p class="error">You have entered no command, type help.<p>`)

@@ -194,8 +194,8 @@ class App {
     saveData() {
         let rawData = JSON.stringify(listContainer.innerHTML);
         localStorage.setItem('todoSystem', rawData);
-        alert('saved!')
-        this.reloadApp()
+        swal("Saved", "Your data has been saved!", "success");
+        setTimeout(() => this.reloadApp(), 2000);
     }
 
     fetchData() {
@@ -228,10 +228,10 @@ class App {
         e.target.elements.confirm_password.value = '';
         if (userPassword === localStorage.getItem('listPasswordAuthenticate')) {
             localStorage.setItem('listPasswordAuthenticate', confirmPassword);
-            alert('Reset password made');
+            swal('Reset made', 'Reset password made!', 'success');
             formModal.className = "hide"
         } else {
-            alert('Please try again!')
+            swal('Try again', 'Wrong password please try again!', 'error');
         }
     }
 
@@ -282,11 +282,11 @@ class App {
             localStorage.setItem('listPasswordAuthenticate', setNewPassword);
         } else if (getPassword == '' || getPassword !== null || getPassword !== '') {
             if (setNewPassword === getPassword) {
-                alert('Welcome');
+                swal('Welcome');
                 this.setToTrue();
                 password_modal.className = 'hide';
             } else {
-                alert('Wrong password')
+                swal('Try again','Wrong password','error');
             }
         }
     }
@@ -296,9 +296,9 @@ class App {
         localStorage.setItem('isPassWordNeeded', userFeedBackPassStart);
         confirm_password_need.style.display = 'none';
         if (boolFeedBack === true) {
-            alert("The password you will type into the protect password textbox will be your todo list protect password.")
+            swal('Instruction', 'The password you will type into the protect password textbox will be your todo list protect password.')
         } else {
-            alert("You've decided not to create a todo list protect password and that is absolutely fine.")
+            swal("You've decided not to create a todo list protect password and that is absolutely fine.")
         }
         this.checkStatus()
     }
@@ -324,7 +324,7 @@ class App {
         	listContainer.innerHTML = '';
         	localStorage.removeItem('todoSystem')
         } else {
-        	alert('Operation terminated!')
+        	swal('Operation terminated!')
         }
     }
 
@@ -353,7 +353,9 @@ class App {
         const note = e.target.elements.note_content.value.trim();
 
         if (title === 'No Activity!' || note === 'No Activity!' || title === 'No Activity' || note === 'No Activity') {
-            alert(`You're not permitted to enter this text ""${title || note}"", it's FORBIDDEN!`)
+            swal('Forbidden', `You're not permitted to enter this text ""${title || note}"", it's FORBIDDEN!`, 'error')
+        } else if (!title || !note) {
+            swal('Incomplete','Your form is not yet complete', 'error')
         } else {
 
             const titleKey = `title-${this.dataId}`;
@@ -386,8 +388,8 @@ class App {
 
             const saveStorageData = JSON.stringify(getCardList);
             localStorage.setItem('cardList', saveStorageData);
-            alert('Month activity saved!')
-            this.reloadApp()
+            swal('Saved!', 'Month activity saved!', 'success');
+            setTimeout(() => this.reloadApp(), 2000);
         }
     }
 
@@ -397,7 +399,7 @@ class App {
         const deleteMonths = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
         const errorMessage = 'Try to type the month activity you want to delete next time, i.e "january", "february", "march".....';
         if (!monthInLowerCase) {
-            alert(errorMessage)
+            swal('Error', errorMessage, 'error')
         } else {
             for (let i = 0; i < deleteMonths.length; i++) {
                 if (monthInLowerCase === deleteMonths[i]) {
@@ -411,8 +413,8 @@ class App {
                         createdAtDate: 'No Date!',
                         editDate: 'No edits made!'
                     }
-                    alert(`${deleteMonths[i].toUpperCase()} activity was successfully deleted`);
-                    location.reload();
+                    swal('Saved', `${deleteMonths[i].toUpperCase()} activity was successfully deleted`, 'success')
+                    setTimeout(() => this.reloadApp(), 2000);
                     const stringifiedMonthData = JSON.stringify(parsedMonthlyData);
                     localStorage.setItem('cardList', stringifiedMonthData)
                 } else if (monthInLowerCase !== deleteMonths[i]) {
@@ -427,7 +429,7 @@ class App {
         if (!createNewPassword) {
             password_modal.className = 'password-modal';
         } else if (createNewPassword) {
-            alert('You already have a password')
+            swal('You already have a password')
         }
     }
 
@@ -443,10 +445,10 @@ class App {
                 localStorage.removeItem('listPasswordAuthenticate');
                 localStorage.removeItem('isPassWordNeeded');
             } else {
-                alert('You have ho password')
+                swal('You have ho password')
             }
         } else {
-            alert('Operation terminated')
+            swal('Operation terminated')
         }
     }
 
@@ -648,11 +650,10 @@ class App {
 
 const appInstance = new App(checkd, uncheckd);
 
-window.onload = () => {
-    //call back function on pageload
+window.addEventListener('load', function() {
     setTimeout(() => { appInstance.monthMonthlyActivity() }, 1000);
     appInstance.getPasswordOnload();
     appInstance.checkStatus();
     appInstance.fetchData();
     postButton.click();
-}
+});

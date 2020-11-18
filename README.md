@@ -10,6 +10,6 @@ This app let's you to plan your daily, weekly and monthly activity
 * jQuery 
 * jQuery UI
 
-#Click the link below to see app in action
+# Click the link below to see app in action
 https://williams247.github.io/organiser/
 
